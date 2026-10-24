@@ -18,11 +18,13 @@ Desktop navigation becomes a menu button on smaller screens. The mobile hero pri
 | --- | --- |
 | Home, desktop | [Open screenshot](images/home-desktop.png) |
 | Home, mobile | [Open screenshot](images/home-mobile.png) |
+| Complete landing page, desktop | [Open full page](images/homepage-full.webp) |
+| Complete landing page, mobile | [Open full page](images/homepage-mobile-full.webp) |
 | About, desktop | [Open screenshot](images/about-desktop.png) |
 | About, mobile | [Open screenshot](images/about-mobile.png) |
 | Desktop and mobile presentation | [Open presentation](images/devices.webp) |
 
-![Mobile home page](images/home-mobile.png)
+![Mobile About page](images/about-mobile.png)
 
 ## Metadata
 

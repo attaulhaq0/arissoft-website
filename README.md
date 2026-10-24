@@ -6,6 +6,22 @@ A freelance web development project for an IT services company, built with React
 
 [Design notes and screenshots](docs/design-notes.md) · [Database setup](database/README.md)
 
+Complete landing page: [Desktop](docs/images/homepage-full.webp) · [Mobile](docs/images/homepage-mobile-full.webp)
+
+<details>
+<summary>Complete desktop landing page</summary>
+
+![Complete Arissoft desktop landing page](docs/images/homepage-full.webp)
+
+</details>
+
+<details>
+<summary>Complete mobile landing page</summary>
+
+![Complete Arissoft mobile landing page](docs/images/homepage-mobile-full.webp)
+
+</details>
+
 ## Website
 
 The public routes cover Home, About, Services and Contact. The interface includes an animated three-slide hero, service and industry sections, responsive navigation, page transitions and a contact form with submission feedback.
