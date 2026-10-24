@@ -1,0 +1,88 @@
+# Arissoft Solutions - Apache Configuration for Hostinger
+# Domain: https://arissoft.tech/
+
+# Enable Rewrite Engine
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirect www to non-www
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# Handle React Router - Serve index.html for all routes except existing files
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/api/
+RewriteRule ^ index.html [L]
+
+# Security Headers
+<IfModule mod_headers.c>
+    # Prevent clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+    
+    # Prevent XSS attacks
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Prevent MIME type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # Referrer Policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Content Security Policy (adjust as needed)
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://arissoft.tech"
+</IfModule>
+
+# Enable Gzip Compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# Browser Caching with optimized settings
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    ExpiresByType application/pdf "access plus 1 month"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+</IfModule>
+
+# Cache-Control headers for better performance
+<IfModule mod_headers.c>
+    <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|webp|svg|js|css|swf|woff|woff2)$">
+        Header set Cache-Control "max-age=31536000, public"
+    </FilesMatch>
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "max-age=0, private, must-revalidate"
+    </FilesMatch>
+</IfModule>
+
+# Protect sensitive files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Protect config file
+<Files "config.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Set default charset
+AddDefaultCharset UTF-8
